@@ -1,0 +1,33 @@
+schema-version: 1.0
+
+type: builder
+
+
+const:
+  srcDir: /usr/src
+  exportDir: /opt/flex
+
+
+var:
+  version: 2.6.4
+
+dependency: https://github.com/xbee-linux/m4.git
+
+provision:
+  - url:
+      from: https://github.com/westes/flex/releases/download/v{% version %}/flex-{% version %}.tar.gz
+      todir: "{% srcDir %}"
+
+build:
+  - shell:
+      cmds:
+        - ./configure --prefix={% exportDir %} --docdir={% exportDir %}/share/doc/flex-{% version %} --disable-static
+        - make
+#        - make check
+        - make install
+      directory: "{% srcDir %}/flex-{% version %}"
+  - shell:
+      cmd: ln -s flex lex
+      directory: "{% exportDir %}/bin"
+  - export: "{% exportDir %}"
+

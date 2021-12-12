@@ -1,0 +1,28 @@
+schema-version: 1.0
+
+description: |
+  Le paquet Flex contient un outil de génération de programmes reconnaissant des modèles de texte.
+
+  Programmes installés: flex, flex++ (lien vers flex), et lex (lien vers flex)
+  Bibliothèques installées: libfl.so
+  Répertoire installé: /usr/share/doc/flex-2.6.4
+
+  flex: Un outil pour générer des programmes reconnaissant des modèles dans un texte ; cela permet une grande diversité pour spécifier les règles de recherche de modèle, éradiquant ainsi le besoin de développer un programme spécialisé
+  flex++: Une extension de flex, est utilisée pour générer du code et des classes C++. C'est un lien symbolique vers flex
+  lex: Un lien symbolique qui exécute flex en mode d'émulation lex
+  libfl: La bibliothèque flex
+
+builder:
+  origin: ./flex-builder
+  var:
+    version: "{% version %}"
+
+
+var:
+  version: 2.6.4
+
+
+provision:
+  - copy:
+      builder: flex
+      todir: /usr
