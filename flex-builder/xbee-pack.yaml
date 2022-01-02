@@ -7,11 +7,7 @@ const:
   srcDir: /usr/src
   exportDir: /opt/flex
 
-
-var:
-  version: 2.6.4
-
-dependency: https://github.com/xbee-linux/m4.git
+dependency: m4
 
 provision:
   - url:
@@ -21,13 +17,13 @@ provision:
 build:
   - shell:
       cmds:
-        - ./configure --prefix={% exportDir %} --docdir={% exportDir %}/share/doc/flex-{% version %} --disable-static
+        - ./configure --prefix=/usr --docdir=/usr/share/doc/flex-{% version %} --disable-static
         - make
 #        - make check
-        - make install
+        - make install DESTDIR={% exportDir %}
       directory: "{% srcDir %}/flex-{% version %}"
   - shell:
       cmd: ln -s flex lex
-      directory: "{% exportDir %}/bin"
+      directory: "{% exportDir %}/usr/bin"
   - export: "{% exportDir %}"
 

@@ -12,11 +12,7 @@ description: |
   lex: Un lien symbolique qui exécute flex en mode d'émulation lex
   libfl: La bibliothèque flex
 
-builder:
-  origin: ./flex-builder
-  var:
-    version: "{% version %}"
-
+builder: ./flex-builder
 
 var:
   version: 2.6.4
@@ -25,4 +21,4 @@ var:
 provision:
   - copy:
       builder: flex
-      todir: /usr
+      todir: /
