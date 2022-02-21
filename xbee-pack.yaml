@@ -1,5 +1,7 @@
 schema-version: 1.0
 
+type: builder
+
 description: |
   Le paquet Flex contient un outil de génération de programmes reconnaissant des modèles de texte.
 
@@ -12,13 +14,27 @@ description: |
   lex: Un lien symbolique qui exécute flex en mode d'émulation lex
   libfl: La bibliothèque flex
 
-builder: ./flex-builder
-
-var:
+in:
   version: 2.6.4
 
 
+dependency: m4
+
 provision:
-  - copy:
-      builder: flex
-      todir: /
+  - url:
+      from: https://github.com/westes/flex/releases/download/v{% version %}/flex-{% version %}.tar.gz
+      todir: "{% xbeeSrc %}"
+
+build:
+  - shell:
+      cmds:
+        - ./configure --prefix=/usr --docdir=/usr/share/doc/flex-{% version %} --disable-static
+        - make
+#        - make check
+        - make install DESTDIR={% xbeeOut %}
+      directory: "{% xbeeSrc %}/flex-{% version %}"
+  - shell:
+      cmd: ln -s flex lex
+      directory: "{% xbeeOut %}/usr/bin"
+
+
