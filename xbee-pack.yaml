@@ -21,9 +21,7 @@ var:
 builder: m4
 
 provision:
-  - url:
-      from: https://github.com/westes/flex/releases/download/v{{ .version }}/flex-{{ .version }}.tar.gz
-      todir: "{{ .xbee.src }}"
+  url: https://github.com/westes/flex/releases/download/v{{ .version }}/flex-{{ .version }}.tar.gz
 
 build:
   - shell:
