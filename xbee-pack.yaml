@@ -15,22 +15,23 @@ description: |
   libfl: La bibliothèque flex
 
 var:
-  version: 2.6.4
+  xbee:
+    version: 2.6.4
 
 
 builder: m4
 
 provision:
-  url: https://github.com/westes/flex/releases/download/v{{ .version }}/flex-{{ .version }}.tar.gz
+  url: https://github.com/westes/flex/releases/download/v{{ .xbee.version }}/flex-{{ .xbee.version }}.tar.gz
 
 build:
   - shell:
       cmds:
-        - ./configure --prefix=/usr --docdir=/usr/share/doc/flex-{{ .version }} --disable-static
+        - ./configure --prefix=/usr --docdir=/usr/share/doc/flex-{{ .xbee.version }} --disable-static
         - make
 #        - make check
         - make install DESTDIR={{ .xbee.out }}
-      directory: "{{ .xbee.src }}/flex-{{ .version }}"
+      directory: "{{ .xbee.src }}/flex-{{ .xbee.version }}"
   - shell:
       cmd: ln -s flex lex
       directory: "{{ .xbee.out }}/usr/bin"
