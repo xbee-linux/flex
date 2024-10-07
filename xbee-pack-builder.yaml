@@ -1,7 +1,5 @@
 schema-version: 1.0
 
-type: builder
-
 description: |
   Le paquet Flex contient un outil de génération de programmes reconnaissant des modèles de texte.
 
